@@ -5,7 +5,7 @@
    State:       →  .is-active, .is-missing, .is-playing (set by js/main.js)
 
    TABLE OF CONTENTS
-   01. Design tokens  (colours, fonts, spacing — tweak the look here first)
+   01. Design tokens + themes (Blender / Maya / Unreal colours live here)
    02. Reset & base
    03. Layout helpers
    04. Shared components  (eyebrow, button, section-heading, panel)
@@ -25,34 +25,105 @@
 /* ==========================================================================
    01. DESIGN TOKENS
    ========================================================================== */
-:root {
-  /* Colour — "3D viewport" dark UI */
-  --color-bg:          #151517;
-  --color-surface:     #1c1c1f;
-  --color-surface-2:   #232327;
-  --color-line:        #2e2e33;
-  --color-line-strong: #3d3d44;
+/* Default theme = Blender. The Maya and Unreal themes below only override
+   what differs. Add a new theme by copying one of those blocks.            */
+:root,
+[data-theme="blender"] {
+  /* Colour — Blender 4.x dark UI */
+  --color-bg:          #2a2a2a;
+  --color-surface:     #303030;
+  --color-surface-2:   #3d3d3d;
+  --color-line:        #3f3f3f;
+  --color-line-strong: #545454;
   --color-grid:        rgba(255, 255, 255, 0.035);
-  --color-grid-strong: rgba(255, 255, 255, 0.09);
+  --color-grid-strong: rgba(255, 255, 255, 0.1);
 
-  --color-text:        #ebe8e2;
-  --color-text-muted:  #8e8b85;
-  --color-text-faint:  #5c5a56;
+  --color-text:        #e6e6e6;
+  --color-text-muted:  #a6a6a6;
+  --color-text-faint:  #747474;
 
-  --color-accent:      #ff7a1a;   /* "selected object" orange */
-  --color-accent-soft: rgba(255, 122, 26, 0.14);
-  --color-key:         #f2c94c;   /* keyframe yellow */
+  --color-accent:      #ffa033;   /* active object orange */
+  --color-accent-soft: rgba(255, 160, 51, 0.14);
+  --color-on-accent:   #1a1a1a;   /* text on top of the accent colour */
+  --color-key:         #f0f0f0;   /* keyframe diamonds (white, like the dope sheet) */
+  --color-playhead:    #4772b3;   /* Blender's blue current-frame line */
   --color-ok:          #6fcf6a;
 
-  --color-axis-x:      #e5484d;
-  --color-axis-y:      #7ccf5a;
-  --color-axis-z:      #4c8dff;
+  --color-axis-x:      #ff3352;
+  --color-axis-y:      #8bdc00;
+  --color-axis-z:      #2890ff;
   --color-missing:     #ff00ff;   /* missing-texture magenta */
+  --color-missing-b:   #000000;
 
-  /* Typography */
-  --font-display: "Instrument Serif", "Times New Roman", serif;
-  --font-body:    "Inter Tight", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-mono:    "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --viewport-bg: radial-gradient(ellipse at 50% 40%, #3d3d3d 0%, transparent 70%);
+  --radius:      6px;
+}
+
+/* Maya — mid-grey UI, green selection, red keys */
+[data-theme="maya"] {
+  --color-bg:          #3c3c3c;
+  --color-surface:     #444444;
+  --color-surface-2:   #4f4f4f;
+  --color-line:        #2e2e2e;
+  --color-line-strong: #5d5d5d;
+  --color-grid:        rgba(0, 0, 0, 0.12);
+  --color-grid-strong: rgba(0, 0, 0, 0.28);
+
+  --color-text:        #e0e0e0;
+  --color-text-muted:  #b4b4b4;
+  --color-text-faint:  #8a8a8a;
+
+  --color-accent:      #4ee39c;   /* selection green */
+  --color-accent-soft: rgba(78, 227, 156, 0.14);
+  --color-on-accent:   #10261b;
+  --color-key:         #e04a3c;   /* red key ticks on the time slider */
+  --color-playhead:    #e04a3c;
+
+  --color-axis-x:      #e05555;
+  --color-axis-y:      #74d65e;
+  --color-axis-z:      #5287e0;
+  --color-missing:     #ff00ff;
+  --color-missing-b:   #000000;
+
+  --viewport-bg: linear-gradient(to bottom, #6e7681 0%, #3c3c3c 85%);
+  --radius:      2px;
+}
+
+/* Unreal Engine 5 — near-black UI, blue accent, orange selection keys, red playhead */
+[data-theme="unreal"] {
+  --color-bg:          #151515;
+  --color-surface:     #1f1f1f;
+  --color-surface-2:   #2a2a2a;
+  --color-line:        #2c2c2c;
+  --color-line-strong: #3d3d3d;
+  --color-grid:        rgba(255, 255, 255, 0.03);
+  --color-grid-strong: rgba(255, 255, 255, 0.08);
+
+  --color-text:        #f0f0f0;
+  --color-text-muted:  #a0a0a0;
+  --color-text-faint:  #6a6a6a;
+
+  --color-accent:      #2e8bf0;   /* UE5 blue */
+  --color-accent-soft: rgba(46, 139, 240, 0.15);
+  --color-on-accent:   #ffffff;
+  --color-key:         #f5b43a;   /* selection orange */
+  --color-playhead:    #f03a3a;   /* Sequencer's red playhead */
+
+  --color-axis-x:      #d8402f;
+  --color-axis-y:      #6fb12f;
+  --color-axis-z:      #2f6fd8;
+  --color-missing:     #8c8c8c;   /* UE's grey default checker */
+  --color-missing-b:   #5c5c5c;
+
+  --viewport-bg: radial-gradient(ellipse at 50% 0%, #23272d 0%, transparent 70%);
+  --radius:      4px;
+}
+
+:root {
+  /* Typography — JP fonts are fallbacks so Japanese text renders nicely */
+  --font-display: "Instrument Serif", "Noto Serif JP", "Times New Roman", serif;
+  --font-body:    "Inter Tight", "Noto Sans JP", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono:    "JetBrains Mono", "Noto Sans JP", ui-monospace, "SFMono-Regular", Menlo, monospace;
 
   --fs-xs:   0.75rem;
   --fs-sm:   0.875rem;
@@ -60,7 +131,7 @@
   --fs-md:   1.125rem;
   --fs-lg:   1.5rem;
   --fs-xl:   clamp(2.25rem, 5vw, 3.5rem);
-  --fs-hero: clamp(3.75rem, 10vw, 8.5rem);
+  --fs-hero: clamp(3.5rem, 8.5vw, 7.5rem);
 
   /* Spacing scale */
   --space-1: 0.25rem;
@@ -78,7 +149,6 @@
   --container-pad:  clamp(1rem, 4vw, 2.5rem);
   --header-h:       64px;
   --timeline-h:     44px;
-  --radius:         4px;
 
   /* Motion */
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
@@ -119,7 +189,14 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  transition: background-color 400ms var(--ease-out), color 400ms var(--ease-out);
 }
+
+/* Japanese reads better with a bit more line height */
+html[lang="ja"] body { line-height: 1.85; }
+html[lang="ja"] .eyebrow,
+html[lang="ja"] .section-heading__meta,
+html[lang="ja"] .facts__label { letter-spacing: 0.04em; }
 
 img, video, svg, iframe { display: block; max-width: 100%; }
 
@@ -129,7 +206,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 
 ul, ol { list-style: none; }
 
-::selection { background: var(--color-accent); color: var(--color-bg); }
+::selection { background: var(--color-accent); color: var(--color-on-accent); }
 
 :focus-visible {
   outline: 2px solid var(--color-accent);
@@ -189,10 +266,10 @@ ul, ol { list-style: none; }
 .button--primary {
   background: var(--color-accent);
   border-color: var(--color-accent);
-  color: var(--color-bg);
+  color: var(--color-on-accent);
   font-weight: 500;
 }
-.button--primary:hover { background: var(--color-text); border-color: var(--color-text); }
+.button--primary:hover { background: var(--color-text); border-color: var(--color-text); color: var(--color-bg); }
 
 .button--ghost:hover { border-color: var(--color-accent); color: var(--color-accent); }
 
@@ -268,7 +345,7 @@ ul, ol { list-style: none; }
   top: 0;
   z-index: 50;
   height: var(--header-h);
-  background: rgba(21, 21, 23, 0.82);
+  background: color-mix(in srgb, var(--color-surface) 88%, transparent);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--color-line);
@@ -290,11 +367,12 @@ ul, ol { list-style: none; }
 .brand__mark {
   display: grid;
   place-items: center;
-  width: 32px;
+  width: 36px;
   height: 32px;
   border: 1px solid var(--color-accent);
+  border-radius: var(--radius);
   font-family: var(--font-mono);
-  font-size: var(--fs-xs);
+  font-size: 0.65rem;
   font-weight: 500;
   color: var(--color-accent);
 }
@@ -331,6 +409,7 @@ ul, ol { list-style: none; }
 .nav__link.is-active .nav__index { color: var(--color-accent); }
 
 .status {
+  align-self: flex-start;
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
@@ -355,6 +434,50 @@ ul, ol { list-style: none; }
   animation: pulse 2.4s ease-in-out infinite;
 }
 
+/* Theme + language pickers — styled like a 3D app's header dropdowns */
+.prefs {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.prefs__field {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.prefs__label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-faint);
+}
+
+.prefs__select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding: 0.3rem 1.6rem 0.3rem 0.6rem;
+  border: 1px solid var(--color-line-strong);
+  border-radius: var(--radius);
+  background-color: var(--color-surface-2);
+  /* chevron */
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--color-text-muted) 50%),
+    linear-gradient(135deg, var(--color-text-muted) 50%, transparent 50%);
+  background-position: calc(100% - 12px) 52%, calc(100% - 8px) 52%;
+  background-size: 4px 4px, 4px 4px;
+  background-repeat: no-repeat;
+  color: var(--color-text);
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  cursor: pointer;
+  transition: border-color var(--dur) var(--ease-out);
+}
+.prefs__select:hover { border-color: var(--color-accent); }
+.prefs__select option { background: var(--color-surface); color: var(--color-text); }
+
 
 /* ==========================================================================
    06. HERO
@@ -374,6 +497,9 @@ ul, ol { list-style: none; }
   padding-block: var(--space-8);
   overflow: hidden;
   isolation: isolate;
+  background: var(--viewport-bg);
+  border-radius: var(--radius);
+  transition: background 400ms var(--ease-out);
 }
 
 /* Perspective ground grid with red X / green Y axis lines */
@@ -439,7 +565,8 @@ ul, ol { list-style: none; }
   font-family: var(--font-mono);
   font-size: 0.7rem;
   letter-spacing: 0.04em;
-  color: var(--color-text-faint);
+  color: var(--color-text-muted);
+  opacity: 0.75;
 }
 .hero__hud--tl { top: calc(var(--space-4) + 10px);    left: calc(var(--container-pad) + 34px); }
 .hero__hud--br { bottom: calc(var(--space-4) + 10px); right: calc(var(--container-pad) + 34px); }
@@ -478,23 +605,29 @@ ul, ol { list-style: none; }
   letter-spacing: -0.02em;
 }
 
-.hero__title-accent {
+.hero__title-line { display: block; }
+
+/* staggered like keys offset on a timeline */
+.hero__title-line--accent {
   font-style: italic;
   color: var(--color-accent);
-  padding-left: 0.6em;   /* offset second line — feels set by hand */
+  padding-left: 0.5em;
 }
+.hero__title-line--offset { padding-left: 1em; }
+
+.hero__kana {
+  margin-top: calc(var(--space-3) * -1);
+  font-family: var(--font-body);
+  font-size: var(--fs-sm);
+  letter-spacing: 0.2em;
+  color: var(--color-text-muted);
+}
+.hero__kana:empty { display: none; }
 
 .hero__role {
   font-family: var(--font-mono);
   font-size: var(--fs-md);
   color: var(--color-text);
-}
-
-.hero__amp {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: 1.3em;
-  color: var(--color-text-muted);
 }
 
 .hero__lede {
@@ -578,7 +711,7 @@ ul, ol { list-style: none; }
   justify-content: center;
   gap: var(--space-1);
   /* classic missing-texture checker */
-  background-color: #000;
+  background-color: var(--color-missing-b);
   background-image:
     linear-gradient(45deg, var(--color-missing) 25%, transparent 25%, transparent 75%, var(--color-missing) 75%),
     linear-gradient(45deg, var(--color-missing) 25%, transparent 25%, transparent 75%, var(--color-missing) 75%);
@@ -603,7 +736,7 @@ ul, ol { list-style: none; }
   left: -7px;
   padding: 0.1rem 0.5rem;
   background: var(--color-accent);
-  color: var(--color-bg);
+  color: var(--color-on-accent);
   font-family: var(--font-mono);
   font-size: 0.7rem;
 }
@@ -1011,7 +1144,7 @@ ul, ol { list-style: none; }
   gap: var(--space-4);
   height: var(--timeline-h);
   padding-inline: var(--container-pad);
-  background: rgba(28, 28, 31, 0.94);
+  background: color-mix(in srgb, var(--color-surface) 94%, transparent);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-top: 1px solid var(--color-line-strong);
@@ -1052,7 +1185,7 @@ ul, ol { list-style: none; }
   left: 0;
   width: 2px;
   margin-left: -1px;
-  background: var(--color-accent);
+  background: var(--color-playhead);
   pointer-events: none;
 }
 .timeline__playhead::before {        /* playhead cap */
@@ -1063,7 +1196,7 @@ ul, ol { list-style: none; }
   width: 10px;
   height: 8px;
   transform: translateX(-50%);
-  background: var(--color-accent);
+  background: var(--color-playhead);
   clip-path: polygon(0 0, 100% 0, 100% 60%, 50% 100%, 0 60%);
 }
 
@@ -1122,7 +1255,7 @@ ul, ol { list-style: none; }
   z-index: 100;
   padding: var(--space-2) var(--space-4);
   background: var(--color-accent);
-  color: var(--color-bg);
+  color: var(--color-on-accent);
 }
 .skip-link:focus { top: var(--space-4); }
 
@@ -1144,7 +1277,13 @@ ul, ol { list-style: none; }
 /* ==========================================================================
    13. RESPONSIVE
    ========================================================================== */
+@media (max-width: 1100px) {
+  .brand__name { display: none; }
+}
+
 @media (max-width: 960px) {
+  .prefs__label { display: none; }
+
   .hero__viewport {
     grid-template-columns: 1fr;
     min-height: auto;
@@ -1160,13 +1299,13 @@ ul, ol { list-style: none; }
 @media (max-width: 720px) {
   :root { --header-h: 56px; }
 
-  .status,
   .brand__name,
   .hero__hud--br,
-  .timeline__fps { display: none; }
+  .timeline__fps,
+  .nav,
+  .prefs__label { display: none; }
 
-  .nav__list { gap: var(--space-4); }
-  .nav__index { display: none; }
+  .prefs { margin-left: auto; }
 
   .section { padding-block: var(--space-8); }
 

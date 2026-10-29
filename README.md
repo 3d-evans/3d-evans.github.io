@@ -1,6 +1,6 @@
 # 3d-evans.github.io
 
-Personal portfolio & demo reel — live at **https://3d-evans.github.io**
+3D animation portfolio & demo reel — live at **https://3d-evans.github.io**
 
 Plain HTML/CSS/JS. No build step, no frameworks: what's in this folder is exactly what GitHub Pages serves.
 
@@ -12,7 +12,9 @@ Plain HTML/CSS/JS. No build step, no frameworks: what's in this folder is exactl
 ├── css/
 │   └── styles.css          ← all styling. Section 01 = design tokens
 ├── js/
-│   └── main.js             ← timeline scrubber, placeholders, small extras
+│   ├── main.js             ← timeline scrubber, placeholders, small extras
+│   ├── theme.js            ← Blender / Maya / Unreal theme switcher
+│   └── i18n.js             ← Spanish + Japanese translations
 └── assets/
     ├── images/
     │   ├── profile.jpg      ← YOUR PHOTO (portrait 4:5, ~1200×1500)
@@ -36,8 +38,8 @@ Every editable spot in `index.html` is marked with an `<!-- EDIT: ... -->` comme
 | What | Where |
 |---|---|
 | Page title / Google description | `<head>` |
-| Name, role, one-line pitch | Hero section (`.hero__title`, `.hero__role`, `.hero__lede`) |
-| "Available for work" badge | Header `.status` — remove `status--available` to turn it off |
+| Name, role, one-line pitch | Hero section (`.hero__title`, `.hero__role`, `.hero__lede`) + translations in `js/i18n.js` |
+| "Available for work" badge | `.status` in the hero — remove `status--available` to turn it off |
 | Reel title bar text | `.player__title` |
 | Vimeo / YouTube instead of MP4 | "OPTION B" comment inside `.player__screen` |
 | Shot breakdown | `.breakdown__list` — one `<li>` per shot |
@@ -46,12 +48,25 @@ Every editable spot in `index.html` is marked with an `<!-- EDIT: ... -->` comme
 | Software / toolkit | `.outliner` |
 | Experience / education | `.keyframes` |
 | Email | `.contact__email` (href + text) **and** `data-copy-email` on the Copy button |
-| Social links | `.socials` — replace `href="#"` and the `@handle` |
+| Social links | `.socials` — Instagram + LinkedIn are live; ArtStation/Vimeo slots are commented out, ready to use |
+
+## Themes (Blender · Maya · Unreal)
+
+- Colours for each theme are in `css/styles.css`, section 01: `:root, [data-theme="blender"]`, `[data-theme="maya"]`, `[data-theme="unreal"]`.
+- The viewport HUD texts per theme are in `js/theme.js`.
+- The visitor's choice is remembered in their browser. Blender is the default.
+
+## Languages (English · Español · 日本語)
+
+- English is written in `index.html`. Spanish and Japanese live in `js/i18n.js`.
+- Any element with `data-i18n="key"` is translated using that key. When you change English text,
+  update the same key under `es` and `ja`. A missing key just shows the English.
+- Share a link in a specific language: `https://3d-evans.github.io/?lang=ja` or `?lang=es`.
 
 ## Styling
 
-- **Colours, fonts, spacing:** `:root` tokens at the top of `styles.css`.
-  Changing `--color-accent` re-themes the whole site.
+- **Colours:** per-theme tokens at the top of `styles.css` (e.g. `--color-accent` inside each theme block).
+- **Fonts, spacing:** the plain `:root` block right after the themes.
 - **Naming:** BEM — `.block`, `.block__element`, `.block--modifier`. JS-driven states use `.is-*`.
 - **Timeline length:** `TOTAL_FRAMES` at the top of `main.js`.
 - **New section:** copy any `<section class="section ...">`, give it an `id` and a

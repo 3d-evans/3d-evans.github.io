@@ -5,7 +5,7 @@
    3. Reel play overlay
    4. Timeline scrubber (scroll → frame counter + keyframes)
    5. Active nav link
-   6. Copy-email button
+   6. Copy-email button + language-change hook
    7. Reveal on scroll
    ========================================================================== */
 
@@ -16,9 +16,12 @@
   const TOTAL_FRAMES = 240;
 
   /* 1. Year ---------------------------------------------------------------- */
-  document.querySelectorAll("[data-year]").forEach((el) => {
-    el.textContent = new Date().getFullYear();
-  });
+  const fillYears = () => {
+    document.querySelectorAll("[data-year]").forEach((el) => {
+      el.textContent = new Date().getFullYear();
+    });
+  };
+  fillYears();
 
 
   /* 2a. Missing image → show "missing texture" placeholder ---------------- */
@@ -75,12 +78,16 @@
   const maxScroll = () => Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
   const pad = (n) => String(n).padStart(4, "0");
 
+  const labelKey = (key, section) => {
+    key.dataset.label = section.dataset.keyframe;
+    key.setAttribute("aria-label", section.dataset.keyframe);
+  };
+
   const keys = sections.map((section) => {
     const key = document.createElement("button");
     key.type = "button";
     key.className = "timeline__key";
-    key.dataset.label = section.dataset.keyframe;
-    key.setAttribute("aria-label", `Jump to ${section.dataset.keyframe}`);
+    labelKey(key, section);
     key.addEventListener("click", () => section.scrollIntoView({ behavior: "smooth" }));
     keysWrap && keysWrap.appendChild(key);
     return { key, section };
@@ -156,16 +163,25 @@
 
   /* 6. Copy email ---------------------------------------------------------- */
   document.querySelectorAll("[data-copy-email]").forEach((btn) => {
-    const original = btn.textContent;
     btn.addEventListener("click", async () => {
+      const original = btn.textContent;
       try {
         await navigator.clipboard.writeText(btn.dataset.copyEmail);
-        btn.textContent = "Copied ✓";
+        btn.textContent = window.i18n ? window.i18n.t("contact.copied") : "Copied ✓";
       } catch {
         btn.textContent = btn.dataset.copyEmail;
       }
       setTimeout(() => { btn.textContent = original; }, 1800);
     });
+  });
+
+
+  /* 6b. Language change (fired by js/i18n.js) ------------------------------ */
+  document.addEventListener("langchange", () => {
+    fillYears();
+    keys.forEach(({ key, section }) => labelKey(key, section));
+    // text length changes can move sections → re-measure the timeline
+    requestAnimationFrame(() => { placeKeys(); update(); });
   });
 
 
