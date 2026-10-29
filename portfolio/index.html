@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- EDIT: page title + description (what shows in Google and browser tabs) -->
+  <title>Daniel García — 3D Animator &amp; Web Designer</title>
+  <meta name="description" content="Portfolio and demo reel of Daniel García, 3D animator and web designer.">
+
+  <!-- Social share preview (LinkedIn, WhatsApp, X...). Add a 1200×630 image at assets/images/og-cover.jpg -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Daniel García — 3D Animator &amp; Web Designer">
+  <meta property="og:description" content="Demo reel, about and contact.">
+  <meta property="og:image" content="assets/images/og-cover.jpg">
+
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+
+  <!-- Fonts: display serif + clean sans + mono for the "software UI" labels -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/main.js" defer></script>
+</head>
+
+<body class="page">
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- =========================================================
+       HEADER — reads like the menu bar of a 3D package
+       ========================================================= -->
+  <header class="site-header">
+    <div class="site-header__inner container">
+      <a class="brand" href="#top" aria-label="Back to top">
+        <span class="brand__mark" aria-hidden="true">DG</span>
+        <span class="brand__name">Daniel García</span>
+      </a>
+
+      <nav class="nav" aria-label="Main">
+        <ul class="nav__list">
+          <li class="nav__item"><a class="nav__link" href="#reel"><span class="nav__index">01</span>Reel</a></li>
+          <li class="nav__item"><a class="nav__link" href="#about"><span class="nav__index">02</span>About</a></li>
+          <li class="nav__item"><a class="nav__link" href="#contact"><span class="nav__index">03</span>Contact</a></li>
+        </ul>
+      </nav>
+
+      <!-- EDIT: availability status. Remove the --available modifier to turn the dot grey -->
+      <p class="status status--available">
+        <span class="status__dot" aria-hidden="true"></span>
+        Available for work
+      </p>
+    </div>
+  </header>
+
+
+  <main id="main">
+
+    <!-- =========================================================
+         00 · HERO — the "viewport": grid floor, wire cube, camera frame
+         ========================================================= -->
+    <section class="hero" id="top" data-keyframe="Intro">
+      <div class="hero__viewport container">
+
+        <!-- Decorative viewport layers -->
+        <div class="hero__floor" aria-hidden="true"></div>
+        <div class="safe-frame" aria-hidden="true">
+          <span class="safe-frame__corner safe-frame__corner--tl"></span>
+          <span class="safe-frame__corner safe-frame__corner--tr"></span>
+          <span class="safe-frame__corner safe-frame__corner--bl"></span>
+          <span class="safe-frame__corner safe-frame__corner--br"></span>
+        </div>
+        <p class="hero__hud hero__hud--tl" aria-hidden="true">[ Persp ] Camera_01 · 35mm</p>
+        <p class="hero__hud hero__hud--br" aria-hidden="true">Objects 1/1 · Verts 8 · Faces 6</p>
+
+        <svg class="axis-gizmo" viewBox="0 0 64 64" aria-hidden="true">
+          <line class="axis-gizmo__x" x1="20" y1="44" x2="52" y2="44"/>
+          <line class="axis-gizmo__y" x1="20" y1="44" x2="38" y2="30"/>
+          <line class="axis-gizmo__z" x1="20" y1="44" x2="20" y2="10"/>
+          <text class="axis-gizmo__label" x="55" y="47">X</text>
+          <text class="axis-gizmo__label" x="40" y="28">Y</text>
+          <text class="axis-gizmo__label" x="16" y="7">Z</text>
+        </svg>
+
+        <!-- Content -->
+        <div class="hero__content">
+          <p class="eyebrow">Portfolio — <span data-year>2026</span></p>
+
+          <!-- EDIT: your name -->
+          <h1 class="hero__title">
+            Daniel<br>
+            <em class="hero__title-accent">García</em>
+          </h1>
+
+          <!-- EDIT: your role / tagline -->
+          <p class="hero__role">3D Animator <span class="hero__amp">&amp;</span> Web Designer</p>
+
+          <!-- EDIT: one-sentence pitch -->
+          <p class="hero__lede">
+            I bring characters to life frame by frame — and design the places on the web where they live.
+          </p>
+
+          <div class="hero__actions">
+            <a class="button button--primary" href="#reel">
+              <span class="button__icon" aria-hidden="true">▶</span> Watch demo reel
+            </a>
+            <a class="button button--ghost" href="#contact">Get in touch</a>
+          </div>
+        </div>
+
+        <!-- Portrait, styled like a selected object with transform handles -->
+        <div class="hero__media">
+          <div class="cube-stage" aria-hidden="true">
+            <div class="wire-cube">
+              <span class="wire-cube__face wire-cube__face--front"></span>
+              <span class="wire-cube__face wire-cube__face--back"></span>
+              <span class="wire-cube__face wire-cube__face--right"></span>
+              <span class="wire-cube__face wire-cube__face--left"></span>
+              <span class="wire-cube__face wire-cube__face--top"></span>
+              <span class="wire-cube__face wire-cube__face--bottom"></span>
+            </div>
+          </div>
+
+          <figure class="portrait">
+            <figcaption class="portrait__tag">obj_daniel.jpg</figcaption>
+            <!-- Shown automatically while the photo is missing (the classic "missing texture" checker) -->
+            <div class="portrait__placeholder" aria-hidden="true">
+              <span>TEXTURE MISSING</span>
+              <small>assets/images/profile.jpg</small>
+            </div>
+            <!-- EDIT: put your photo at assets/images/profile.jpg (portrait 4:5, ~1200×1500px) -->
+            <img class="portrait__img" src="assets/images/profile.jpg" alt="Portrait of Daniel García" width="1200" height="1500" data-fallback>
+            <span class="portrait__handle portrait__handle--tl" aria-hidden="true"></span>
+            <span class="portrait__handle portrait__handle--tr" aria-hidden="true"></span>
+            <span class="portrait__handle portrait__handle--bl" aria-hidden="true"></span>
+            <span class="portrait__handle portrait__handle--br" aria-hidden="true"></span>
+          </figure>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- =========================================================
+         01 · DEMO REEL
+         ========================================================= -->
+    <section class="section reel" id="reel" data-keyframe="Reel">
+      <div class="container">
+
+        <header class="section-heading">
+          <span class="section-heading__index">01</span>
+          <h2 class="section-heading__title">Demo Reel</h2>
+          <span class="section-heading__meta">Shot 010 · 24 fps</span>
+        </header>
+
+        <div class="player">
+          <div class="player__bar">
+            <span class="player__dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <!-- EDIT: reel filename / title shown in the window bar -->
+            <span class="player__title">Render Result — demo-reel_2026.mp4</span>
+            <span class="player__specs">1920×1080 · 24 fps</span>
+          </div>
+
+          <div class="player__screen">
+            <!-- Shown automatically while no video file is found -->
+            <div class="player__placeholder" aria-hidden="true">
+              <div class="player__bars"></div>
+              <p class="player__placeholder-text">
+                NO REEL LOADED<br>
+                <small>add assets/video/demo-reel.mp4</small>
+              </p>
+            </div>
+
+            <!-- OPTION A (default): self-hosted video.
+                 EDIT: drop your reel at assets/video/demo-reel.mp4 and a still at assets/images/reel-poster.jpg -->
+            <video class="player__video" controls preload="metadata" playsinline poster="assets/images/reel-poster.jpg" data-reel>
+              <source src="assets/video/demo-reel.mp4" type="video/mp4">
+              Your browser does not support HTML5 video.
+            </video>
+
+            <!-- OPTION B: Vimeo / YouTube embed (recommended once the reel is long or heavy).
+                 1. Delete the <video> above (or the whole OPTION A block).
+                 2. Uncomment ONE iframe below and paste your video ID.
+            <iframe class="player__embed" src="https://player.vimeo.com/video/YOUR_VIDEO_ID?title=0&byline=0&portrait=0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="Demo reel"></iframe>
+            <iframe class="player__embed" src="https://www.youtube-nocookie.com/embed/YOUR_VIDEO_ID?rel=0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen title="Demo reel"></iframe>
+            -->
+
+            <button class="player__play" type="button" aria-label="Play demo reel" data-reel-play>
+              <span class="player__play-icon" aria-hidden="true"></span>
+              <span class="player__play-label">Play reel</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Shot breakdown — recruiters love knowing exactly what you did in each shot -->
+        <div class="breakdown">
+          <h3 class="breakdown__title">Shot breakdown</h3>
+          <ol class="breakdown__list">
+            <!-- EDIT: one <li> per shot. Duplicate / delete as needed -->
+            <li class="breakdown__item">
+              <span class="breakdown__time">00:00 – 00:12</span>
+              <span class="breakdown__shot">Shot title</span>
+              <span class="breakdown__role">Animation, layout · Maya</span>
+            </li>
+            <li class="breakdown__item">
+              <span class="breakdown__time">00:12 – 00:27</span>
+              <span class="breakdown__shot">Shot title</span>
+              <span class="breakdown__role">Body mechanics · Rig by [Credit]</span>
+            </li>
+            <li class="breakdown__item">
+              <span class="breakdown__time">00:27 – 00:45</span>
+              <span class="breakdown__shot">Shot title</span>
+              <span class="breakdown__role">Acting / lip-sync · Blender</span>
+            </li>
+          </ol>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- =========================================================
+         02 · ABOUT
+         ========================================================= -->
+    <section class="section about" id="about" data-keyframe="About">
+      <div class="container">
+
+        <header class="section-heading">
+          <span class="section-heading__index">02</span>
+          <h2 class="section-heading__title">About</h2>
+          <span class="section-heading__meta">Outliner</span>
+        </header>
+
+        <div class="about__grid">
+
+          <!-- EDIT: your bio. Keep it short: 2–3 paragraphs -->
+          <div class="about__bio">
+            <p class="about__intro">
+              Hi, I'm Daniel — a 3D animator with a designer's eye for detail.
+            </p>
+            <p>
+              I focus on [character animation / body mechanics / acting], obsessing over weight, timing and the small
+              in-betweens that make a performance feel alive.
+            </p>
+            <p>
+              Before animation I worked in web design, building interfaces in Figma and shipping them in HTML &amp; CSS.
+              That background shaped how I work: clear structure, clean files, and always thinking about the person on the other side of the screen.
+            </p>
+
+            <dl class="facts">
+              <!-- EDIT: quick facts -->
+              <div class="facts__row"><dt class="facts__label">Based in</dt><dd class="facts__value">[City], Spain</dd></div>
+              <div class="facts__row"><dt class="facts__label">Focus</dt><dd class="facts__value">Character animation</dd></div>
+              <div class="facts__row"><dt class="facts__label">Open to</dt><dd class="facts__value">Full-time · Freelance · Remote</dd></div>
+              <div class="facts__row"><dt class="facts__label">Languages</dt><dd class="facts__value">Spanish, English</dd></div>
+            </dl>
+          </div>
+
+          <div class="about__side">
+
+            <!-- Toolkit styled as a scene outliner -->
+            <div class="panel">
+              <p class="panel__title">Toolkit</p>
+              <ul class="outliner">
+                <!-- EDIT: groups and tools. Add/remove <li> freely -->
+                <li class="outliner__group">
+                  <span class="outliner__label">Animation</span>
+                  <ul class="outliner__children">
+                    <li class="outliner__item">Autodesk Maya</li>
+                    <li class="outliner__item">Blender</li>
+                  </ul>
+                </li>
+                <li class="outliner__group">
+                  <span class="outliner__label">Render &amp; Comp</span>
+                  <ul class="outliner__children">
+                    <li class="outliner__item">[Arnold / Eevee / Cycles]</li>
+                    <li class="outliner__item">[After Effects / Nuke]</li>
+                  </ul>
+                </li>
+                <li class="outliner__group">
+                  <span class="outliner__label">Web &amp; Design</span>
+                  <ul class="outliner__children">
+                    <li class="outliner__item">Figma</li>
+                    <li class="outliner__item">HTML &amp; CSS</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Experience / education as keyframes -->
+            <div class="panel">
+              <p class="panel__title">Keyframes</p>
+              <ol class="keyframes">
+                <!-- EDIT: newest first. Duplicate a <li> to add an entry -->
+                <li class="keyframes__item keyframes__item--current">
+                  <span class="keyframes__year">2026</span>
+                  <span class="keyframes__what">Demo reel &amp; portfolio</span>
+                  <span class="keyframes__where">Independent</span>
+                </li>
+                <li class="keyframes__item">
+                  <span class="keyframes__year">20XX</span>
+                  <span class="keyframes__what">[Course / Degree in 3D Animation]</span>
+                  <span class="keyframes__where">[School]</span>
+                </li>
+                <li class="keyframes__item">
+                  <span class="keyframes__year">20XX</span>
+                  <span class="keyframes__what">Web Designer</span>
+                  <span class="keyframes__where">[Company]</span>
+                </li>
+              </ol>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- =========================================================
+         03 · CONTACT + SOCIALS
+         ========================================================= -->
+    <section class="section contact" id="contact" data-keyframe="Contact">
+      <div class="container">
+
+        <header class="section-heading">
+          <span class="section-heading__index">03</span>
+          <h2 class="section-heading__title">Contact</h2>
+          <span class="section-heading__meta">Final frame</span>
+        </header>
+
+        <div class="contact__grid">
+          <div class="contact__main">
+            <p class="contact__kicker">Have a shot that needs life in it?</p>
+            <!-- EDIT: your email (both the href and the visible text) -->
+            <a class="contact__email" href="mailto:your.email@example.com">your.email@example.com</a>
+
+            <div class="contact__actions">
+              <!-- EDIT: put your CV at assets/docs/cv.pdf -->
+              <a class="button button--primary" href="assets/docs/cv.pdf" download>
+                <span class="button__icon" aria-hidden="true">↓</span> Download CV
+              </a>
+              <button class="button button--ghost" type="button" data-copy-email="your.email@example.com">Copy email</button>
+            </div>
+          </div>
+
+          <!-- EDIT: social links. Replace href="#" and @handle. Delete any <li> you don't use -->
+          <ul class="socials">
+            <li class="socials__item">
+              <a class="socials__link" href="#" target="_blank" rel="noopener">
+                <span class="socials__name">ArtStation</span>
+                <span class="socials__handle">@username</span>
+                <span class="socials__arrow" aria-hidden="true">↗</span>
+              </a>
+            </li>
+            <li class="socials__item">
+              <a class="socials__link" href="#" target="_blank" rel="noopener">
+                <span class="socials__name">LinkedIn</span>
+                <span class="socials__handle">/in/username</span>
+                <span class="socials__arrow" aria-hidden="true">↗</span>
+              </a>
+            </li>
+            <li class="socials__item">
+              <a class="socials__link" href="#" target="_blank" rel="noopener">
+                <span class="socials__name">Vimeo</span>
+                <span class="socials__handle">@username</span>
+                <span class="socials__arrow" aria-hidden="true">↗</span>
+              </a>
+            </li>
+            <li class="socials__item">
+              <a class="socials__link" href="#" target="_blank" rel="noopener">
+                <span class="socials__name">Instagram</span>
+                <span class="socials__handle">@username</span>
+                <span class="socials__arrow" aria-hidden="true">↗</span>
+              </a>
+            </li>
+            <li class="socials__item">
+              <a class="socials__link" href="#" target="_blank" rel="noopener">
+                <span class="socials__name">YouTube</span>
+                <span class="socials__handle">@username</span>
+                <span class="socials__arrow" aria-hidden="true">↗</span>
+              </a>
+            </li>
+            <li class="socials__item">
+              <a class="socials__link" href="#" target="_blank" rel="noopener">
+                <span class="socials__name">Behance</span>
+                <span class="socials__handle">@username</span>
+                <span class="socials__arrow" aria-hidden="true">↗</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+
+  <footer class="site-footer">
+    <div class="site-footer__inner container">
+      <p class="site-footer__copy">© <span data-year>2026</span> Daniel García · Hand-built in HTML &amp; CSS</p>
+      <a class="site-footer__top" href="#top">Back to frame 0001 ↑</a>
+    </div>
+  </footer>
+
+
+  <!-- =========================================================
+       TIMELINE — fixed scrubber. Scroll = playhead.
+       Keyframes are generated by js/main.js from every [data-keyframe] section.
+       ========================================================= -->
+  <div class="timeline" aria-label="Page timeline">
+    <p class="timeline__frame"><span class="timeline__frame-label">FRM</span> <span data-frame>0001</span></p>
+    <div class="timeline__track" data-timeline-track>
+      <div class="timeline__progress" data-timeline-progress></div>
+      <div class="timeline__keys" data-timeline-keys></div>
+      <div class="timeline__playhead" data-timeline-playhead></div>
+    </div>
+    <p class="timeline__fps">24 fps</p>
+  </div>
+
+</body>
+</html>
